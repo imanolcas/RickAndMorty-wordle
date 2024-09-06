@@ -55,12 +55,12 @@ export function CharacterContextProvider(props: ProviderProps) {
     const handleClick = (e:  React.MouseEvent<HTMLButtonElement>) => {
         setFocus(false);
         const value = e.currentTarget.value
-        const personajeSeleccionado = personajes.find(el => el.name === value)
+        const personajeSeleccionado: Character | undefined = personajes.find(el => el.name === value)
 
         if(arrayOfCharacterSelect.length > 0 || personajeSeleccionado){
             const personajeExistente = arrayOfCharacterSelect.find(el => el.id === personajeSeleccionado?.id)
             setCharacterSelect(personajeSeleccionado)
-            if(!personajeExistente){
+            if(!personajeExistente && personajeSeleccionado){
                 const arrayNuevo = [...arrayOfCharacterSelect, personajeSeleccionado]
                 setArrayOfCharacterSelect(arrayNuevo)
             }
@@ -77,10 +77,9 @@ export function CharacterContextProvider(props: ProviderProps) {
         if(arrayOfCharacterSelect.length > 0 || personajeSeleccionado){
             const personajeExistente = arrayOfCharacterSelect.find(el => el.id === personajeSeleccionado?.id)
             setCharacterSelect(personajeSeleccionado)
-            if(!personajeExistente){
+            if(!personajeExistente && personajeSeleccionado){
                 const arrayNuevo = [...arrayOfCharacterSelect, personajeSeleccionado]
                 setArrayOfCharacterSelect(arrayNuevo)
-                console.log("este es el contexto",arrayOfCharacterSelect)
             }
         }
         

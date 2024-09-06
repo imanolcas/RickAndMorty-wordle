@@ -6,8 +6,7 @@ import Description from './components/Description.js'
 import { Ganador } from './components/Ganador.js'
 import ListaDeSeleccion from './components/ListaDeSeleccion.js'
 import { Search } from './components/Search'
-import { ContextProvider, useAppContext} from './context/appContext.jsx'
-// import { contextProvider, useAppContext } from './context/appContext'
+import { useAppContext} from './context/appContext.jsx'
 
 function App() {
 

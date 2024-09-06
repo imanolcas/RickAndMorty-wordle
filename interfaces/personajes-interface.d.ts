@@ -78,6 +78,12 @@ export const CharacterPropsRequired = {
   handleSubmit: () => {},
   handleChange: () => {},
   win: () => {},
-  
+  error: undefined as string,
+  focus: undefined as boolean,
+  query: undefined as string,
+  winner: undefined as boolean,
+  characterSelect: {} as Character,
+  arrayOfCharacterSelect: [] as Character[]
 }
   
+
