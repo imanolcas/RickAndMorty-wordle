@@ -1,0 +1,4 @@
+.modal-ganador{
+    display: flex;
+    flex-direction: column;
+}
