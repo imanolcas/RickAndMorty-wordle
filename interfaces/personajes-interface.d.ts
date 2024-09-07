@@ -44,6 +44,8 @@ export interface ContextProps {
     cargarData: (string) => void;
     cargarPersonajeDelDia: () => void;
     personajeDelDia: Character[];
+    cargarDataInicial: () => void
+    personajesIniciales: Character[];
     // setPersonajeDelDia: React.Dispatch<React.SetStateAction<CharacterOfTheDay[]>>;
   }
 
@@ -54,6 +56,9 @@ export const PropsRequired = {
     cargarPersonajeDelDia: () => {},
     personajeDelDia: [],
     setPersonajeDelDia: () => {},
+    cargarDataInicial: () => {},
+    personajesIniciales: []
+
 }
 
 export interface CharacterContextProps{

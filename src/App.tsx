@@ -10,20 +10,33 @@ import { useAppContext} from './context/appContext.jsx'
 
 function App() {
 
-  const { cargarPersonajeDelDia } = useAppContext()
+  const { cargarPersonajeDelDia, personajeDelDia, cargarDataInicial, personajesIniciales, cargarData } = useAppContext()
 
   useEffect(()=>{
-    cargarPersonajeDelDia()
+    cargarDataInicial()
+    console.log(personajesIniciales)
   }, [])
+  
+  useEffect(()=>{
+    if(personajesIniciales.length > 0){
+      cargarPersonajeDelDia()
+    }
+  }, [personajesIniciales])
+  
 
   return (
     <>
+    {
+      personajeDelDia.length > 0 ? 
       <CharacterContextProvider>
           <Description />
           <ListaDeSeleccion />
           <Search/>
           <Ganador/>
-      </CharacterContextProvider>
+      </CharacterContextProvider> :
+      "Cargando..."
+    }
+      
     </>
         
   )
