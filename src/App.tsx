@@ -10,7 +10,7 @@ import { useAppContext} from './context/appContext.jsx'
 
 function App() {
 
-  const { cargarPersonajeDelDia, personajeDelDia, cargarDataInicial, personajesIniciales, cargarData } = useAppContext()
+  const { cargarPersonajeDelDia, personajeDelDia, cargarDataInicial, personajesIniciales} = useAppContext()
 
   useEffect(()=>{
     cargarDataInicial()
