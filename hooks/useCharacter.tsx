@@ -20,16 +20,24 @@ export function CharacterContextProvider(props: ProviderProps) {
     // const characterSelect = useRef<Character>()
     const [characterSelect, setCharacterSelect ] = useState<Character>()
     const [arrayOfCharacterSelect, setArrayOfCharacterSelect ] = useState<Character[]>([])
+    const [ personajesFiltrados, setPersonajesFiltrados ] = useState<Character[]>([])
 
 
     const { personajes } = useAppContext()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log("antes", query)
         const newQuery = e.target.value;
+        console.log("despues", query)
         if (newQuery.startsWith(" ")) return;
         newQuery.trim();
         setQuery(newQuery);
         personajes.sort();
+        const personajesFiltradosNuevo = personajes.filter(
+            el => !arrayOfCharacterSelect.some(character => character.id === el.id)
+        );
+
+        setPersonajesFiltrados(personajesFiltradosNuevo)
 
         if (query == " ") {
         return;
@@ -55,14 +63,20 @@ export function CharacterContextProvider(props: ProviderProps) {
     const handleClick = (e:  React.MouseEvent<HTMLButtonElement>) => {
         setFocus(false);
         const value = e.currentTarget.value
-        const personajeSeleccionado: Character | undefined = personajes.find(el => el.name === value)
-
+        const personajeSeleccionado: Character | undefined = personajesFiltrados.find(el => el.id == value)
         if(arrayOfCharacterSelect.length > 0 || personajeSeleccionado){
             const personajeExistente = arrayOfCharacterSelect.find(el => el.id === personajeSeleccionado?.id)
             setCharacterSelect(personajeSeleccionado)
             if(!personajeExistente && personajeSeleccionado){
                 const arrayNuevo = [...arrayOfCharacterSelect, personajeSeleccionado]
                 setArrayOfCharacterSelect(arrayNuevo)
+                // if (!arrayLocal) {
+                //     window.localStorage.setItem("characterSelects", JSON.stringify(arrayNuevo));
+                // } else {
+                //     const parsedArrayLocal = JSON.parse(arrayLocal);
+                //     arrayNuevo = [...parsedArrayLocal, personajeSeleccionado];
+                //     window.localStorage.setItem("characterSelects", JSON.stringify(arrayNuevo));
+                // }
             }
         }
     
@@ -72,7 +86,7 @@ export function CharacterContextProvider(props: ProviderProps) {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         const value = e.currentTarget.value
-        const personajeSeleccionado = personajes.find(el => el.name !== value)
+        const personajeSeleccionado = personajes.find(el => el.name == value)
 
         if(arrayOfCharacterSelect.length > 0 || personajeSeleccionado){
             const personajeExistente = arrayOfCharacterSelect.find(el => el.id === personajeSeleccionado?.id)
@@ -90,6 +104,7 @@ export function CharacterContextProvider(props: ProviderProps) {
     const win = (personajeDelDia: Character) => {
         if(characterSelect?.id === personajeDelDia.id){
             setWinner(true)
+            console.log(characterSelect)
         }else{
             setWinner(false)
         }
@@ -109,7 +124,8 @@ export function CharacterContextProvider(props: ProviderProps) {
             win, 
             winner, 
             arrayOfCharacterSelect ,
-            handleClickBlur
+            handleClickBlur,
+            personajesFiltrados
         }}>
           {props.children}
         </characterContext.Provider>

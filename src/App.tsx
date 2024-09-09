@@ -14,7 +14,6 @@ function App() {
 
   useEffect(()=>{
     cargarDataInicial()
-    console.log(personajesIniciales)
   }, [])
   
   useEffect(()=>{

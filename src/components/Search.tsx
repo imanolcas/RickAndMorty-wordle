@@ -7,7 +7,7 @@ import "./search.css"
 export function Search() {
   const { personajes, cargarData, setPersonajes, cargarPersonajeDelDia} = useAppContext();
 
-  const { focus, query, handleChange, handleFocus, handleClick, handleSubmit, error, winner} = useCharacterContext()
+  const { focus, query, handleChange, handleFocus, handleClick, handleSubmit, error, winner, personajesFiltrados} = useCharacterContext()
 
   useEffect(() => {
     if(query === "") setPersonajes([])
@@ -41,14 +41,15 @@ export function Search() {
         
 
         <p style={{ color: "red" }}>{error}</p>
+        {focus ?
         <div>
-          {focus ? (
+           {personajes.length > 0 ? (
             <ul className="search-characters">
-              {personajes.length > 0 ? (
-                personajes.map((el: Character) => {
+               {
+                personajesFiltrados.map((el: Character) => {
                   return (
                     <li key={el.id} style={{ listStyle: "none"}} >
-                    <button value={el.name} onClick={handleClick}>
+                    <button value={el.id} onClick={handleClick}>
                       <img
                         src={el.image}
                         alt={el.name}
@@ -58,14 +59,19 @@ export function Search() {
                     </li>
                   );
                 })
-              ) : (
-                <p>No se encuentra ese personaje</p>
-              )}
+              } 
+                
+              
             </ul>
           ) : (
-            ""
-          )}
-        </div>
+          
+            <p>No se encuentra ese personaje</p>
+          ) 
+        }
+          </div>
+          :
+           ""
+        }
       </form>
       }
     </>

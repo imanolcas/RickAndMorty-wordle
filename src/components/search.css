@@ -20,10 +20,12 @@
     align-items: center;
     width: 290px;
     text-align: center;
+    
 }
 
 .search-characters li button p{
     margin-left: 10px;
+    color: #000;
 }
 .search-characters img{
     width: 50px;

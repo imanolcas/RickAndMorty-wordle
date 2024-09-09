@@ -74,6 +74,7 @@ export interface CharacterContextProps{
   win: (personajeDelDia: Character) => void;
   winner: boolean;
   arrayOfCharacterSelect: Character[];
+  personajesFiltrados: Character[]
 }
 
 export const CharacterPropsRequired = {
@@ -88,7 +89,9 @@ export const CharacterPropsRequired = {
   query: undefined as string,
   winner: undefined as boolean,
   characterSelect: {} as Character,
-  arrayOfCharacterSelect: [] as Character[]
+  arrayOfCharacterSelect: [] as Character[],
+  personajesFiltrados: [] as Character[]
+
 }
   
 
